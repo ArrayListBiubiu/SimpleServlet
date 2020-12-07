@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:http="http://www.springframework.org/schema/mvc" xmlns:https="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>SimpleReg</title>
+</head>
+<body>
+    <form>
+        账号：<input type="text" id="username" name="username"><br>
+        密码：<input type="text" id="password" name="password"><br>
+        <input type="reset" value="重置"><input type="button" value="提交" onclick="login()">
+    </form>
+
+    <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        function login() {
+            // jQuery的id选择器，获取输入框内的值。
+            var u = $("username").val();
+            var p = $("password").val();
+            // 当点击提交按钮时，触发ajax的异步请求方式。
+            // 由jQurey提供的ajax请求函数$.ajax()，参数是一个json对象。
+            $.ajax({
+                "url" : "login.do",
+                "data" : "username=" + u + "&password=" + p,
+                "type" : "POST",
+                "dataType" : "json",
+                "success" : function (json) {
+                    if (json.state == 1) {
+                        location.href = "index.html";
+                    } else if (json.state == 2) {
+                        alert(json.message);
+                    } else if (json.state == 3) {
+                        alert(json.message);
+                    }
+                }
+            })
+        }
+    </script>
+</body>
+</html>

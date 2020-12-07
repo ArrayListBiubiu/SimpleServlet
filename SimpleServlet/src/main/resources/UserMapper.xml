@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+	"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<!--namespace：映射的接口全名。-->
+<mapper namespace="mybatis.UserMapper">
+	<cache></cache>
+
+	<!--1.根据sql种类选择节点。
+		2.sql语句中的参数使用#{}框住Monkey类的属性名。
+		3.不需要分号结束。-->
+
+	<!--id：抽象方法的名称。
+	    useGeneratedKeys表示自增长字段的值，如id。
+	    keyProperty表示键的属性名，即Monkey类中的id-->
+	<insert id="insert" parameterType="mybatis.Monkey" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO t_user (
+			username,password,
+			age,phone,
+			email,is_delete
+		) VALUES (
+			#{username},#{password},
+			#{age},#{phone},
+			#{email},#{isDelete}
+		)
+	</insert>
+
+
+
+
+	<select id="findAll" resultType="mybatis.Monkey">
+		SELECT
+			id,username,
+			password,age,
+			phone,email
+		FROM
+			t_user
+	</select>
+
+
+	<select id="findByMonkeyName" resultType="mybatis.Monkey">
+		SELECT
+			id,username,
+			password,age,
+			phone,email
+		FROM
+			t_user
+		where
+			username=#{username}
+	</select>
+
+
+	<select id="getCount" resultType="java.lang.Integer">
+		SELECT count(*) FROM t_user
+	</select>
+
+
+
+    <update id="updatePasswordByAge">
+		UPDATE
+		    t_user
+		SET
+		    password=#{password}
+		WHERE
+		    age=#{age}
+	</update>
+
+
+
+	<!--<select id="findById"
+			resultType="cn.tedu.mybatis.UserVO">
+		SELECT
+			t_user.id,username,
+			password,age,
+			phone,email,
+			is_delete AS isDelete,
+			department_id AS departmentId,
+			name AS departmentName
+		FROM
+			t_user
+		LEFT JOIN
+			t_department
+		ON
+			t_user.department_id=t_department.id
+		WHERE
+			t_user.id=#{id}
+	</select>
+
+
+
+	<delete id="deleteById">
+		DELETE FROM t_user WHERE id=#{id}
+	</delete>
+
+	<update id="updatePassword">
+		UPDATE t_user SET password=#{password}
+	</update>
+
+
+
+
+
+
+
+	-->
+
+</mapper>
+
+
+
+
+
+

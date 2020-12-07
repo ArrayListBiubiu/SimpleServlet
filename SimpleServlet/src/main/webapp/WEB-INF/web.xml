@@ -1,0 +1,150 @@
+<!DOCTYPE web-app PUBLIC
+        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+    <display-name>Archetype Created Web Application</display-name>
+
+
+    <filter>
+        <filter-name>servlet03.CommentFilter</filter-name>
+        <filter-class>servlet03.CommentFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>servlet03.CommentFilter</filter-name>
+        <url-pattern>/comment</url-pattern>
+    </filter-mapping>
+
+
+
+    <servlet>
+        <servlet-name>servlet01.Demo01</servlet-name>
+        <servlet-class>servlet01.Demo01</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>add</servlet-name>
+        <servlet-class>servlet01.Add</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>list</servlet-name>
+        <servlet-class>servlet01.ListServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>del</servlet-name>
+        <servlet-class>servlet01.Del</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>servlet02.AddCookieServlet</servlet-name>
+        <servlet-class>servlet02.AddCookieServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>servlet02.FindCookieServlet</servlet-name>
+        <servlet-class>servlet02.FindCookieServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>servlet02.SomeServlet</servlet-name>
+        <servlet-class>servlet02.SomeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>servlet03.LifeServlet</servlet-name>
+        <servlet-class>servlet03.LifeServlet</servlet-class>
+        <!--
+            配置初始化参数
+          -->
+        <init-param>
+            <param-name>company</param-name>
+            <param-value>阿里巴巴</param-value>
+        </init-param>
+        <!--配置启动加载。
+            容器启动后会立即创建servlet实例。
+            参数是大于等于0的整数，值越小，优先级越高。-->
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>servlet03.CommentServlet</servlet-name>
+        <servlet-class>servlet03.CommentServlet</servlet-class>
+    </servlet>
+    <!--<servlet>
+        <servlet-name>servlet01.ActionServlet</servlet-name>
+        <servlet-class>servlet01.ActionServlet</servlet-class>
+    </servlet>-->
+    <servlet>
+        <servlet-name>a4</servlet-name>
+        <jsp-file>/JspTest/a4.jsp</jsp-file>
+        <init-param>
+            <param-name>company</param-name>
+            <param-value>腾讯</param-value>
+        </init-param>
+    </servlet>
+    <!--DispatcherServlet根本上也是一个servlet。-->
+    <servlet>
+        <servlet-name>org.springframework.web.servlet.DispatcherServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!--由于springmvc框架是基于spring的，所以需要加载spring的配置文件，在DispatcherServlet的父类FrameworkServlet类中
+            有属性contextConfigLocation，用于加载上下文配置文件，即spring的配置文件，为它配置初始化参数。
+                注：只会加载一次（servlet本身是单例的）-->
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:spring.xml</param-value>
+        </init-param>
+        <!--由于上述代码，spring的配置文件会随着DispatcherServlet类的初始化而加载，在springmvc的工作流程中，更希望启动Tomcat的
+            时候即加载，所以添加<load-on-startup>1</load-on-startup>，表示当Tomcat启动的时候初始化这个servlet，从而加载spring
+            的配置文件。-->
+        <load-on-startup>1</load-on-startup>
+        <!--***最终得到的效果：启动Tomcat时，自动加载servlet，随即也自动加载spring的配置文件。***-->
+    </servlet>
+
+
+
+
+    <servlet-mapping>
+        <servlet-name>servlet01.Demo01</servlet-name>
+        <url-pattern>/hello</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>add</servlet-name>
+        <url-pattern>/add</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>list</servlet-name>
+        <url-pattern>/list</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>del</servlet-name>
+        <url-pattern>/del</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servlet02.AddCookieServlet</servlet-name>
+        <url-pattern>/addCookie</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servlet02.FindCookieServlet</servlet-name>
+        <url-pattern>/findCookie</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servlet02.SomeServlet</servlet-name>
+        <url-pattern>/some</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servlet03.LifeServlet</servlet-name>
+        <url-pattern>/life</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servlet03.CommentServlet</servlet-name>
+        <url-pattern>/comment</url-pattern>
+    </servlet-mapping>
+    <!--<servlet-mapping>
+        <servlet-name>servlet01.ActionServlet</servlet-name>
+        <url-pattern>/*.do</url-pattern>
+    </servlet-mapping>-->
+    <servlet-mapping>
+        <servlet-name>a4</servlet-name>
+        <url-pattern>/a4</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>org.springframework.web.servlet.DispatcherServlet</servlet-name>
+        <url-pattern>*.do</url-pattern>
+    </servlet-mapping>
+
+
+</web-app>
